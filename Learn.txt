@@ -1,0 +1,105 @@
+1. DSA
+
+    DSA = Data Structures + Algorithm.
+    - Data structures store data efficiently.
+    - Algorithm is set of code which DS to solve problems.
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+2. Big-O
+
+    Big-O tells how an algorithm’s runtime (or memory) grows as input size
+    "n" grows. We care about dominant terms and worst-case behavior.
+
+    types (fast to slow):
+     - O(1) — constant time. e.g., access arr[i].
+     - O(log n) — logarithmic. e.g., binary search: each step halves the problem.
+     - O(n) — linear. e.g., single pass over array.
+     - O(n log n) — linearithmic. e.g., good comparison sorts (merge/quick average).
+     - O(n²) — quadratic. e.g., nested loops over array pairs.
+     - O(2ⁿ), O(n!) — exponential/factorial. Backtracking brute force 
+       (subset / permutations) can hit these.
+       
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+3. How to Compute Big-O
+
+    Rule 1 — Drop constants:
+        If an algorithm does something like:
+        
+        for (let i = 0; i < n; i++) { … }   // runs n times
+        for (let i = 0; i < n; i++) { … }   // runs n times
+
+        total work: n + n = 2n → O(n)
+        We ignore the 2. If you’re running a marathon, running 1 
+        extra km doesn’t change that it’s still a marathon.
+
+    Rule 2 — Drop lower-order terms:
+        total work: n² + n → dominated by n² → O(n²)
+        If you’re fighting a tiger and a cat, the tiger decides your fate.
+
+    Rule 3 — Loops multiply: 
+        Every outer loop run triggers the entire inner loop.
+        examples -
+
+        1. If an algorithm does something like:
+
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+            }
+        }
+
+        total work: n * n = n² → O(n²).
+        
+        2. If an algorithm does something like:
+
+        for (let i = 0; i < n; i++) {          // Loop A → O(n)
+            for (let j = 0; j < 10; j++) {     // Loop B → O(1)
+            }
+        }
+
+        Outer loop is O(n) 
+        Inner loop is O(1)
+        total work: O(n × 1) = O(n).
+
+        3. If an algorithm does something like:
+
+        for (let i = 0; i < n; i++) {           // runs n times
+            for (let j = 0; j < n; j += 2) {    // j jumps by 2
+            }
+        }
+
+        Outer loop is O(n) 
+        Inner loop, j increases by 2 → runs n/2 times
+        total work: n × (n/2) = n²/2 → O(n²)
+
+    Rule 4 — Consecutive loops add:
+        If an algorithm does something like:
+        for (...) {}
+        total work: O(n + n) = O(n)
+        You do them one after another, not nested.
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+Some more Examples Rule 3 of Mixed Loops (diff sizes)
+
+1. pattern -
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+        }
+    }
+
+    total work: O(n × m)
+
+2. pattern -
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+        }
+    }
+
+    total work -
